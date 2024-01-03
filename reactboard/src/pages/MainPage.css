@@ -1,20 +1,21 @@
-.custom-shape-divider-bottom-1703078452 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+.container {
+    background: rgb(218, 245, 225);
+    background: linear-gradient(
+        90deg,
+        rgba(218, 245, 225, 1) 0%,
+        rgba(177, 239, 231, 1) 48%,
+        rgba(0, 212, 255, 1) 91%
+    );
     width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
+    height: 100vb;
 }
 
-.custom-shape-divider-bottom-1703078452 svg {
-    position: relative;
-    display: block;
-    width: calc(127% + 1.3px);
-    height: 150px;
+.button1 {
+    width: 160px;
+    opacity: 0.5;
+    transition: opacity 0.2s ease-in-out;
 }
 
-.custom-shape-divider-bottom-1703078452 .shape-fill {
-    fill: #000000;
+.button1:hover {
+    opacity: 1;
 }
