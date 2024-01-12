@@ -16,8 +16,7 @@ const SignUpPage = () => {
     // 버튼만 누르면 리로드 되는것을 막아줌
     event.preventDefault();
 
-    //회원 가입 api 코드 추가하기
-
+    // 회원 가입 api 코드 추가하기
     console.log('ID: ', ID);
     console.log('Password : ', Password);
   };
