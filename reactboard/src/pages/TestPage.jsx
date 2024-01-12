@@ -15,11 +15,12 @@ const TestPage = () => {
   const [list, setList] = useState([]);
 
   // 드래그 이벤트
-  const handleDragStart = (e, name) => {
-    e.dataTransfer.setData('name', name); // 드래그된 데이터 설정
-    console.log(name);
+  const handleDragStart = (e, id) => {
+    e.dataTransfer.setData('id', id); // 드래그된 데이터 설정
+    console.log(id);
   };
 
+  // 기본 동작을 방지하고 드롭을 허용합니다.
   const handleDragOver = e => {
     e.preventDefault();
   };
@@ -27,12 +28,12 @@ const TestPage = () => {
   // 드랍 이벤트
   const handleDrop = e => {
     e.preventDefault();
-    const droppedText = e.dataTransfer.getData('name'); // 드래그된 데이터 가져오기
-    console.log('Dropped:', droppedText);
+    const droppedItem = Number(e.dataTransfer.getData('id')); // 드래그된 데이터 가져오기
+    console.log('Dropped:', droppedItem);
 
     if (window.confirm('정말로 삭제할겨?')) {
-      // 특정 name을 가진 항목을 제거한 새로운 배열 생성
-      const newData = list.filter(item => item.name !== droppedText);
+      // droppedItem 같은 id 가진 항목을 제거한 새로운 배열 생성
+      const newData = list.filter(item => item.id !== droppedItem);
 
       // 상태 업데이트
       setList(newData);
@@ -46,13 +47,13 @@ const TestPage = () => {
 
   return (
     <div className="container">
-      <h4>테스트 페이지에양</h4>
+      <h4>테스트 페이지</h4>
       <div>
         {list.map(value => (
           <div
             key={value.id}
             draggable
-            onDragStart={e => handleDragStart(e, value.name)}
+            onDragStart={e => handleDragStart(e, value.id)}
           >
             {value.name}
           </div>
