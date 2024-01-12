@@ -17,13 +17,15 @@ const LoginPage = () => {
     // 버튼만 누르면 리로드 되는것을 막아줌
     event.preventDefault();
 
+    // 로그인 api 코드 추가하기
+
     console.log('ID: ', ID);
     console.log('Password : ', Password);
   };
 
   return (
     <div className="container">
-      <h4>로그인하기</h4>
+      <h4>로그인</h4>
       <div>
         <form onSubmit={onSubmitHandler}>
           <label htmlFor="id">
