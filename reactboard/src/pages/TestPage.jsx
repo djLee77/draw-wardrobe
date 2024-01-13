@@ -39,13 +39,13 @@ const TestPage = () => {
 
   // 드래그 이벤트
   const handleDragStart = (e, categoryID, itemID) => {
-    e.dataTransfer.setData('id', JSON.stringify({ categoryID, itemID })); // 드래그된 데이터 설정
+    e.dataTransfer.setData('data', JSON.stringify({ categoryID, itemID })); // 드래그된 데이터 설정
   };
 
   // 드랍 이벤트
   const handleDrop = e => {
     e.preventDefault();
-    const droppedIDs = JSON.parse(e.dataTransfer.getData('id')); // 드래그된 데이터 가져오기
+    const droppedIDs = JSON.parse(e.dataTransfer.getData('data')); // 드래그된 데이터 가져오기
     console.log('Dropped:', droppedIDs);
 
     if (window.confirm('정말로 삭제할겨?')) {
