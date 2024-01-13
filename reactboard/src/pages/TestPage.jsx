@@ -1,13 +1,34 @@
 import { useEffect, useState } from 'react';
+import Trash from '../components/Trash';
 
 const testData = [
   {
-    id: 0,
-    name: '이병선',
+    categoryID: 0,
+    categoryName: '이잉',
+    items: [
+      {
+        id: 0,
+        name: '이병선',
+      },
+      {
+        id: 1,
+        name: '이대준',
+      },
+    ],
   },
   {
-    id: 1,
-    name: '이대준',
+    categoryName: '치잉',
+    categoryID: 1,
+    items: [
+      {
+        id: 0,
+        name: '이우현',
+      },
+      {
+        id: 1,
+        name: '김상규',
+      },
+    ],
   },
 ];
 
@@ -15,26 +36,29 @@ const TestPage = () => {
   const [list, setList] = useState([]);
 
   // 드래그 이벤트
-  const handleDragStart = (e, id) => {
-    e.dataTransfer.setData('id', id); // 드래그된 데이터 설정
-    console.log(id);
-  };
-
-  // 기본 동작을 방지하고 드롭을 허용합니다.
-  const handleDragOver = e => {
-    e.preventDefault();
+  const handleDragStart = (e, categoryID, itemID) => {
+    e.dataTransfer.setData('id', JSON.stringify({ categoryID, itemID })); // 드래그된 데이터 설정
   };
 
   // 드랍 이벤트
   const handleDrop = e => {
     e.preventDefault();
-    const droppedItem = Number(e.dataTransfer.getData('id')); // 드래그된 데이터 가져오기
-    console.log('Dropped:', droppedItem);
+    const droppedIDs = JSON.parse(e.dataTransfer.getData('id')); // 드래그된 데이터 가져오기
+    console.log('Dropped:', droppedIDs);
 
     if (window.confirm('정말로 삭제할겨?')) {
       // droppedItem 같은 id 가진 항목을 제거한 새로운 배열 생성
-      const newData = list.filter(item => item.id !== droppedItem);
+      const newData = list.map(category => {
+        if (category.categoryID === droppedIDs.categoryID) {
+          return {
+            ...category,
+            items: category.items.filter(item => item.id !== droppedIDs.itemID),
+          };
+        }
+        return category;
+      });
 
+      console.log(newData);
       // 상태 업데이트
       setList(newData);
     }
@@ -43,6 +67,7 @@ const TestPage = () => {
   // 첫 마운트될때 list 상태 업뎃
   useEffect(() => {
     setList(testData);
+    console.log(list);
   }, []);
 
   return (
@@ -50,29 +75,24 @@ const TestPage = () => {
       <h4>테스트 페이지</h4>
       <div>
         {list.map(value => (
-          <div
-            key={value.id}
-            draggable
-            onDragStart={e => handleDragStart(e, value.id)}
-          >
-            {value.name}
+          <div key={value.categoryID}>
+            {value.categoryName}
+            {value.items.map(item => (
+              <div
+                key={item.id}
+                draggable
+                onDragStart={e => handleDragStart(e, value.categoryID, item.id)}
+              >
+                {item.name}
+              </div>
+            ))}
+            <hr />
           </div>
         ))}
       </div>
-      <div
-        style={{
-          width: '80px',
-          height: '80px',
-          border: '2px dashed #ccc',
-          padding: '20px',
-          margin: '20px',
-        }}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-      >
-        삭제 영역
-      </div>
+      <Trash onDrop={handleDrop} />
     </div>
   );
 };
+
 export default TestPage;
