@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import Trash from '../components/Trash';
+import addItem from '../utils/addItem';
+import addCategory from '../utils/addCategory';
 
 const testData = [
   {
@@ -64,6 +66,18 @@ const TestPage = () => {
     }
   };
 
+  const handleAddCategory = () => {
+    const newCategoryName = window.prompt('카테고리 이름 입력');
+    if (newCategoryName !== null) {
+      addCategory(setList, newCategoryName);
+    }
+  };
+
+  const handleAddItem = categoryID => {
+    const name = window.prompt('이름 입력');
+    addItem(setList, categoryID, name);
+  };
+
   // 첫 마운트될때 list 상태 업뎃
   useEffect(() => {
     setList(testData);
@@ -74,9 +88,19 @@ const TestPage = () => {
     <div className="container">
       <h4>테스트 페이지</h4>
       <div>
+        <button type="button" onClick={handleAddCategory}>
+          카테고리 추가
+        </button>
+        <hr />
         {list.map(value => (
           <div key={value.categoryID}>
-            {value.categoryName}
+            <button
+              type="button"
+              onClick={() => handleAddItem(value.categoryID)}
+            >
+              추가
+            </button>
+            <span>{value.categoryName}</span>
             {value.items.map(item => (
               <div
                 key={item.id}
