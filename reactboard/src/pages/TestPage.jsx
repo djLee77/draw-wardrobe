@@ -48,31 +48,34 @@ const TestPage = () => {
     const droppedIDs = JSON.parse(e.dataTransfer.getData('data')); // 드래그된 데이터 가져오기
     console.log('Dropped:', droppedIDs);
 
-    if (window.confirm('정말로 삭제할겨?')) {
-      // droppedItem 같은 id 가진 항목을 제거한 새로운 배열 생성
-      const newData = list.map(category => {
-        if (category.categoryID === droppedIDs.categoryID) {
-          return {
-            category,
-            items: category.items.filter(item => item.id !== droppedIDs.itemID),
-          };
-        }
-        return category;
-      });
+    if (!window.confirm('정말로 삭제할겨?')) return;
 
-      console.log(newData);
-      // 상태 업데이트
-      setList(newData);
-    }
+    // droppedItem 같은 id 가진 항목을 제거한 새로운 배열 생성
+    const newData = list.map(category => {
+      if (category.categoryID === droppedIDs.categoryID) {
+        return {
+          ...category,
+          items: category.items.filter(item => item.id !== droppedIDs.itemID),
+        };
+      }
+      return category;
+    });
+
+    console.log(newData);
+    // 상태 업데이트
+    setList(newData);
   };
 
+  // 카테고리 추가 함수
   const handleAddCategory = () => {
     const newCategoryName = window.prompt('카테고리 이름 입력');
-    if (newCategoryName !== null) {
-      addCategory(setList, newCategoryName);
-    }
+
+    if (newCategoryName === null) return;
+
+    addCategory(setList, newCategoryName);
   };
 
+  // 아이템 추가 함수
   const handleAddItem = categoryID => {
     const name = window.prompt('이름 입력');
     addItem(setList, categoryID, name);
