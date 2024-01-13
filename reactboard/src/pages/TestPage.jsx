@@ -53,7 +53,7 @@ const TestPage = () => {
       const newData = list.map(category => {
         if (category.categoryID === droppedIDs.categoryID) {
           return {
-            ...category,
+            category,
             items: category.items.filter(item => item.id !== droppedIDs.itemID),
           };
         }
