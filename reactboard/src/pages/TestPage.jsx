@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Trash from '../components/Trash';
 import addItem from '../utils/addItem';
 import addCategory from '../utils/addCategory';
+import useToggle from '../hooks/useToggle';
 
 const testData = [
   {
@@ -36,7 +37,7 @@ const testData = [
 
 const TestPage = () => {
   const [list, setList] = useState([]);
-  const [isLarge, setIsLarge] = useState(false);
+  const [isLarged, toggle] = useToggle(false);
 
   // 드래그 이벤트
   const handleDragStart = (e, categoryID, itemID) => {
@@ -62,7 +63,6 @@ const TestPage = () => {
       return category;
     });
 
-    console.log(newData);
     // 상태 업데이트
     setList(newData);
   };
@@ -82,7 +82,7 @@ const TestPage = () => {
 
     // categoryID와 같은 id 가진 항목을 제거한 새로운 배열 생성
     const newData = list.filter(value => value.categoryID !== deleteID);
-    console.log(newData);
+
     // 상태 업데이트
     setList(newData);
   };
@@ -96,17 +96,16 @@ const TestPage = () => {
   // 첫 마운트될때 list 상태 업뎃
   useEffect(() => {
     setList(testData);
-    console.log(list);
   }, []);
 
   return (
     <div className="container">
       <h4>테스트 페이지</h4>
-      <button type="button" onClick={() => setIsLarge(!isLarge)}>
-        {isLarge ? '작아져라 얍' : '커져라 얍'}
+      <button type="button" onClick={toggle}>
+        {isLarged ? '작아져라 얍' : '커져라 얍'}
       </button>
       <div
-        style={{ width: isLarge ? '80%' : '30%', backgroundColor: 'tomato' }}
+        style={{ width: isLarged ? '80%' : '30%', backgroundColor: 'tomato' }}
       >
         <button type="button" onClick={handleAddCategory}>
           카테고리 추가
@@ -122,7 +121,6 @@ const TestPage = () => {
             </button>
             <span>{value.categoryName}</span>
             <button
-              style={{ float: 'right' }}
               type="button"
               onClick={() => handleDeleteCategory(value.categoryID)}
             >
