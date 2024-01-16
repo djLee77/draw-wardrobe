@@ -1,17 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import GoogleLoginButton from '../components/GoogleLoginButton';
+import useInput from '../hooks/useInput';
 
 const LoginPage = () => {
-  const [ID, setID] = useState('');
-  const [Password, setPassword] = useState('');
-
-  const onIDHandler = event => {
-    setID(event.currentTarget.value);
-  };
-  const onPasswordHandler = event => {
-    setPassword(event.currentTarget.value);
-  };
+  const idInput = useInput('');
+  const passwordInput = useInput('');
 
   const onSubmitHandler = event => {
     // 버튼만 누르면 리로드 되는것을 막아줌
@@ -19,8 +13,8 @@ const LoginPage = () => {
 
     // 로그인 api 코드 추가하기
 
-    console.log('ID: ', ID);
-    console.log('Password : ', Password);
+    console.log('ID: ', idInput.value);
+    console.log('Password : ', passwordInput.value);
   };
 
   return (
@@ -30,15 +24,20 @@ const LoginPage = () => {
         <form onSubmit={onSubmitHandler}>
           <label htmlFor="id">
             <span>ID</span>
-            <input type="id" id="id" value={ID} onChange={onIDHandler} />
+            <input
+              type="id"
+              id="id"
+              value={idInput.value}
+              onChange={idInput.onChange}
+            />
           </label>
           <label htmlFor="password">
             <span>Password</span>
             <input
               type="password"
               id="password"
-              value={Password}
-              onChange={onPasswordHandler}
+              value={passwordInput.value}
+              onChange={passwordInput.onChange}
             />
           </label>
           <br />
