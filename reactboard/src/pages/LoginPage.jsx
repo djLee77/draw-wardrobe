@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import GoogleLoginButton from '../components/GoogleLoginButton';
+import GoogleLoginButton from '../components/Login/GoogleLoginButton';
 import useInput from '../hooks/useInput';
 
 const LoginPage = () => {

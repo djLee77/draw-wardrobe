@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import Trash from '../components/Trash';
+import { useState } from 'react';
+import Trash from '../components/Closet/Trash';
 import addItem from '../utils/addItem';
 import addCategory from '../utils/addCategory';
 import useToggle from '../hooks/useToggle';
@@ -36,7 +36,7 @@ const testData = [
 ];
 
 const TestPage = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(testData);
   const [isLarged, toggle] = useToggle(false);
 
   // 드래그 이벤트
@@ -92,11 +92,6 @@ const TestPage = () => {
     const name = window.prompt('이름 입력');
     addItem(setList, categoryID, name);
   };
-
-  // 첫 마운트될때 list 상태 업뎃
-  useEffect(() => {
-    setList(testData);
-  }, []);
 
   return (
     <div className="container">
