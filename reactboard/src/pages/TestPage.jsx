@@ -76,6 +76,17 @@ const TestPage = () => {
     addCategory(setList, newCategoryName);
   };
 
+  // 카테고리 삭제 함수
+  const handleDeleteCategory = deleteID => {
+    if (!window.confirm('정말로 삭제할겨? 안에 내용도 다 삭제되는뎅')) return;
+
+    // categoryID와 같은 id 가진 항목을 제거한 새로운 배열 생성
+    const newData = list.filter(value => value.categoryID !== deleteID);
+    console.log(newData);
+    // 상태 업데이트
+    setList(newData);
+  };
+
   // 아이템 추가 함수
   const handleAddItem = categoryID => {
     const name = window.prompt('이름 입력');
@@ -110,6 +121,13 @@ const TestPage = () => {
               추가
             </button>
             <span>{value.categoryName}</span>
+            <button
+              style={{ float: 'right' }}
+              type="button"
+              onClick={() => handleDeleteCategory(value.categoryID)}
+            >
+              카테고리 삭제
+            </button>
             <div
               style={{
                 display: 'flex',
