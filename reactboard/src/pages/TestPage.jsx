@@ -3,6 +3,7 @@ import Trash from '../components/Closet/Trash';
 import addItem from '../utils/addItem';
 import addCategory from '../utils/addCategory';
 import useToggle from '../hooks/useToggle';
+import Category from '../components/Closet/Category';
 
 const testData = [
   {
@@ -106,47 +107,14 @@ const TestPage = () => {
           카테고리 추가
         </button>
         <hr />
-        {list.map(value => (
-          <div key={value.categoryID}>
-            <button
-              type="button"
-              onClick={() => handleAddItem(value.categoryID)}
-            >
-              추가
-            </button>
-            <span>{value.categoryName}</span>
-            <button
-              type="button"
-              onClick={() => handleDeleteCategory(value.categoryID)}
-            >
-              카테고리 삭제
-            </button>
-            <div
-              style={{
-                display: 'flex',
-                overflowX: 'auto',
-                whiteSpace: 'nowrap',
-                padding: '16px',
-              }}
-            >
-              {value.items.map(item => (
-                <div
-                  style={{
-                    backgroundColor: 'gray',
-                    margin: '12px',
-                  }}
-                  key={item.id}
-                  draggable
-                  onDragStart={e =>
-                    handleDragStart(e, value.categoryID, item.id)
-                  }
-                >
-                  {item.name}
-                </div>
-              ))}
-            </div>
-            <hr />
-          </div>
+        {list.map(category => (
+          <Category
+            key={category.categoryID}
+            category={category}
+            onAddItem={handleAddItem}
+            onDeleteCategory={handleDeleteCategory}
+            onDragStart={handleDragStart}
+          />
         ))}
       </div>
       <Trash onDrop={handleDrop} />
