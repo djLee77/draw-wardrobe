@@ -2,7 +2,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 
 const GoogleLoginButton = () => {
   // 구글 로그인 버튼 함수
-  const onClickLoginBtn = useGoogleLogin({
+  const handleGoogleLogin = useGoogleLogin({
     onSuccess: tokenResponse => console.log(tokenResponse.access_token),
   });
 
@@ -13,7 +13,7 @@ const GoogleLoginButton = () => {
   */
   return (
     <div>
-      <button type="button" onClick={() => onClickLoginBtn()}>
+      <button type="button" onClick={() => handleGoogleLogin()}>
         <span>구글로 로그인 하기</span>
       </button>
     </div>
