@@ -4,8 +4,8 @@ import GoogleLoginButton from '../components/Login/GoogleLoginButton';
 import useInput from '../hooks/useInput';
 
 const LoginPage = () => {
-  const idInput = useInput('');
-  const passwordInput = useInput('');
+  const [idInput, handleChangeID] = useInput('');
+  const [passwordInput, handleChangePassword] = useInput('');
 
   const onSubmitHandler = event => {
     // 버튼만 누르면 리로드 되는것을 막아줌
@@ -13,8 +13,7 @@ const LoginPage = () => {
 
     // 로그인 api 코드 추가하기
 
-    console.log('ID: ', idInput.value);
-    console.log('Password : ', passwordInput.value);
+    console.log(idInput, passwordInput);
   };
 
   return (
@@ -27,8 +26,8 @@ const LoginPage = () => {
             <input
               type="id"
               id="id"
-              value={idInput.value}
-              onChange={idInput.onChange}
+              value={idInput}
+              onChange={handleChangeID}
             />
           </label>
           <label htmlFor="password">
@@ -36,8 +35,8 @@ const LoginPage = () => {
             <input
               type="password"
               id="password"
-              value={passwordInput.value}
-              onChange={passwordInput.onChange}
+              value={passwordInput}
+              onChange={handleChangePassword}
             />
           </label>
           <br />
