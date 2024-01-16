@@ -2,7 +2,7 @@
 const addCategory = (setList, categoryName) => {
   setList(prevList => {
     const newCategory = {
-      categoryID: prevList.length,
+      categoryID: Math.random(),
       categoryName,
       items: [],
     };
