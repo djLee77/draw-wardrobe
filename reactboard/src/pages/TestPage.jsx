@@ -36,6 +36,7 @@ const testData = [
 
 const TestPage = () => {
   const [list, setList] = useState([]);
+  const [isLarge, setIsLarge] = useState(false);
 
   // 드래그 이벤트
   const handleDragStart = (e, categoryID, itemID) => {
@@ -90,7 +91,12 @@ const TestPage = () => {
   return (
     <div className="container">
       <h4>테스트 페이지</h4>
-      <div>
+      <button type="button" onClick={() => setIsLarge(!isLarge)}>
+        {isLarge ? '작아져라 얍' : '커져라 얍'}
+      </button>
+      <div
+        style={{ width: isLarge ? '80%' : '30%', backgroundColor: 'tomato' }}
+      >
         <button type="button" onClick={handleAddCategory}>
           카테고리 추가
         </button>
@@ -104,15 +110,30 @@ const TestPage = () => {
               추가
             </button>
             <span>{value.categoryName}</span>
-            {value.items.map(item => (
-              <div
-                key={item.id}
-                draggable
-                onDragStart={e => handleDragStart(e, value.categoryID, item.id)}
-              >
-                {item.name}
-              </div>
-            ))}
+            <div
+              style={{
+                display: 'flex',
+                overflowX: 'auto',
+                whiteSpace: 'nowrap',
+                padding: '16px',
+              }}
+            >
+              {value.items.map(item => (
+                <div
+                  style={{
+                    backgroundColor: 'gray',
+                    margin: '12px',
+                  }}
+                  key={item.id}
+                  draggable
+                  onDragStart={e =>
+                    handleDragStart(e, value.categoryID, item.id)
+                  }
+                >
+                  {item.name}
+                </div>
+              ))}
+            </div>
             <hr />
           </div>
         ))}
