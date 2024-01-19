@@ -38,7 +38,9 @@ const AddCategoryModal = ({ setList }) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>카테고리 추가</Button>
+      <Button variant="contained" onClick={handleOpen}>
+        카테고리 추가
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
