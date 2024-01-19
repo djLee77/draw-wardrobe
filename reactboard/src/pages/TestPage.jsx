@@ -42,12 +42,13 @@ const TestPage = () => {
   return (
     <div className="container">
       <h4>테스트 페이지</h4>
-      <button type="button" onClick={toggle}>
-        {isLarged ? '작아져라 얍' : '커져라 얍'}
-      </button>
+
       <div
         style={{ width: isLarged ? '80%' : '30%', backgroundColor: 'tomato' }}
       >
+        <button type="button" onClick={toggle}>
+          {isLarged ? '작아져라 얍' : '커져라 얍'}
+        </button>
         <AddCategoryModal setList={setList} />
         <hr />
         {list.map(category => (
@@ -57,8 +58,8 @@ const TestPage = () => {
             setList={setList}
           />
         ))}
+        <Trash list={list} setList={setList} />
       </div>
-      <Trash list={list} setList={setList} />
     </div>
   );
 };
