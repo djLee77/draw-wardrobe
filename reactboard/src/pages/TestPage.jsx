@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Trash from '../components/Closet/Trash';
 import addItem from '../utils/addItem';
-import addCategory from '../utils/addCategory';
 import useToggle from '../hooks/useToggle';
 import Category from '../components/Closet/Category';
+import AddCategoryModal from '../components/Closet/modals/AddCateogryModal';
 
 const testData = [
   {
@@ -68,15 +68,6 @@ const TestPage = () => {
     setList(newData);
   };
 
-  // 카테고리 추가 함수
-  const handleAddCategory = () => {
-    const newCategoryName = window.prompt('카테고리 이름 입력');
-
-    if (newCategoryName === null) return;
-
-    addCategory(setList, newCategoryName);
-  };
-
   // 카테고리 삭제 함수
   const handleDeleteCategory = deleteID => {
     if (!window.confirm('정말로 삭제할겨? 안에 내용도 다 삭제되는뎅')) return;
@@ -103,9 +94,7 @@ const TestPage = () => {
       <div
         style={{ width: isLarged ? '80%' : '30%', backgroundColor: 'tomato' }}
       >
-        <button type="button" onClick={handleAddCategory}>
-          카테고리 추가
-        </button>
+        <AddCategoryModal setList={setList} />
         <hr />
         {list.map(category => (
           <Category
