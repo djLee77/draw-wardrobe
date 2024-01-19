@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Trash from '../components/Closet/Trash';
-import addItem from '../utils/addItem';
 import useToggle from '../hooks/useToggle';
 import Category from '../components/Closet/Category';
 import AddCategoryModal from '../components/Closet/modals/AddCateogryModal';
@@ -79,12 +78,6 @@ const TestPage = () => {
     setList(newData);
   };
 
-  // 아이템 추가 함수
-  const handleAddItem = categoryID => {
-    const name = window.prompt('이름 입력');
-    addItem(setList, categoryID, name);
-  };
-
   return (
     <div className="container">
       <h4>테스트 페이지</h4>
@@ -100,7 +93,7 @@ const TestPage = () => {
           <Category
             key={category.categoryID}
             category={category}
-            onAddItem={handleAddItem}
+            setList={setList}
             onDeleteCategory={handleDeleteCategory}
             onDragStart={handleDragStart}
           />

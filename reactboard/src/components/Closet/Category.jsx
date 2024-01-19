@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types'; // prop-types 추가
+import AddItemModal from './modals/AddItemModal';
 
-const Category = ({ category, onAddItem, onDeleteCategory, onDragStart }) => {
+const Category = ({ category, setList, onDeleteCategory, onDragStart }) => {
   const styles = {
     itemContainer: {
       display: 'flex',
@@ -16,9 +17,7 @@ const Category = ({ category, onAddItem, onDeleteCategory, onDragStart }) => {
   };
   return (
     <div key={category.categoryID}>
-      <button type="button" onClick={() => onAddItem(category.categoryID)}>
-        추가
-      </button>
+      <AddItemModal categoryID={category.categoryID} setList={setList} />
       <span>{category.categoryName}</span>
       <button
         type="button"
@@ -54,7 +53,7 @@ Category.propTypes = {
       }),
     ).isRequired,
   }).isRequired,
-  onAddItem: PropTypes.func.isRequired,
+  setList: PropTypes.func.isRequired,
   onDeleteCategory: PropTypes.func.isRequired,
   onDragStart: PropTypes.func.isRequired,
 };
