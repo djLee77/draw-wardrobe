@@ -1,19 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types'; // prop-types 추가
 import AddItemModal from './modals/AddItemModal';
+import Item from './Item';
 
-const Category = ({ category, setList, onDeleteCategory, onDragStart }) => {
-  const styles = {
-    itemContainer: {
-      display: 'flex',
-      overflowX: 'auto',
-      whiteSpace: 'nowrap',
-      padding: '16px',
-    },
-    item: {
-      backgroundColor: 'gray',
-      margin: '12px',
-    },
+const Category = ({ category, list, setList }) => {
+  // 카테고리 삭제 함수
+  const handleDeleteCategory = deleteID => {
+    if (!window.confirm('정말로 삭제할겨? 안에 내용도 다 삭제되는뎅')) return;
+
+    // categoryID와 같은 id 가진 항목을 제거한 새로운 배열 생성
+    const newData = list.filter(value => value.categoryID !== deleteID);
+
+    // 상태 업데이트
+    setList(newData);
+  };
+
+  const itemContainer = {
+    display: 'flex',
+    overflowX: 'auto',
+    whiteSpace: 'nowrap',
+    padding: '16px',
   };
   return (
     <div key={category.categoryID}>
@@ -21,20 +27,13 @@ const Category = ({ category, setList, onDeleteCategory, onDragStart }) => {
       <span>{category.categoryName}</span>
       <button
         type="button"
-        onClick={() => onDeleteCategory(category.categoryID)}
+        onClick={() => handleDeleteCategory(category.categoryID)}
       >
         카테고리 삭제
       </button>
-      <div style={styles.itemContainer}>
+      <div style={itemContainer}>
         {category.items.map(item => (
-          <div
-            style={styles.item}
-            key={item.id}
-            draggable
-            onDragStart={e => onDragStart(e, category.categoryID, item.id)}
-          >
-            {item.name}
-          </div>
+          <Item key={item.id} categoryID={category.categoryID} item={item} />
         ))}
       </div>
       <hr />
@@ -53,9 +52,19 @@ Category.propTypes = {
       }),
     ).isRequired,
   }).isRequired,
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      categoryID: PropTypes.number.isRequired,
+      categoryName: PropTypes.string.isRequired,
+      items: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          name: PropTypes.string.isRequired,
+        }),
+      ).isRequired,
+    }),
+  ).isRequired,
   setList: PropTypes.func.isRequired,
-  onDeleteCategory: PropTypes.func.isRequired,
-  onDragStart: PropTypes.func.isRequired,
 };
 
 export default Category;
