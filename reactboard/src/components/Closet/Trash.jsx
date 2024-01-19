@@ -29,18 +29,16 @@ const Trash = ({ list, setList }) => {
     e.preventDefault();
   };
 
+  const trashStyle = {
+    width: '80px',
+    height: '80px',
+    border: '2px dashed #ccc',
+    padding: '20px',
+    margin: '20px',
+  };
+
   return (
-    <div
-      style={{
-        width: '80px',
-        height: '80px',
-        border: '2px dashed #ccc',
-        padding: '20px',
-        margin: '20px',
-      }}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-    >
+    <div style={trashStyle} onDragOver={handleDragOver} onDrop={handleDrop}>
       삭제 영역
     </div>
   );
