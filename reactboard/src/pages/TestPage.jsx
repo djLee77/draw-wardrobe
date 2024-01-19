@@ -38,14 +38,15 @@ const testData = [
 const TestPage = () => {
   const [list, setList] = useState(testData);
   const [isLarged, toggle] = useToggle(false);
+  const boxStyle = {
+    width: isLarged ? '80%' : '30%',
+    backgroundColor: 'tomato',
+  };
 
   return (
-    <div className="container">
+    <div>
       <h4>테스트 페이지</h4>
-
-      <div
-        style={{ width: isLarged ? '80%' : '30%', backgroundColor: 'tomato' }}
-      >
+      <div style={boxStyle}>
         <button type="button" onClick={toggle}>
           {isLarged ? '작아져라 얍' : '커져라 얍'}
         </button>
