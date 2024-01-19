@@ -23,7 +23,7 @@ const Item = ({ categoryID, item }) => {
 };
 
 Item.propTypes = {
-  categoryID: PropTypes.string.isRequired,
+  categoryID: PropTypes.number.isRequired,
   item: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

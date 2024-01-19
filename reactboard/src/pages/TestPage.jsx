@@ -54,7 +54,6 @@ const TestPage = () => {
           <Category
             key={category.categoryID}
             category={category}
-            list={list}
             setList={setList}
           />
         ))}

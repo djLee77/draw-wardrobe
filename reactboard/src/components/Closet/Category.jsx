@@ -3,16 +3,15 @@ import PropTypes from 'prop-types'; // prop-types 추가
 import AddItemModal from './modals/AddItemModal';
 import Item from './Item';
 
-const Category = ({ category, list, setList }) => {
+const Category = ({ category, setList }) => {
   // 카테고리 삭제 함수
   const handleDeleteCategory = deleteID => {
     if (!window.confirm('정말로 삭제할겨? 안에 내용도 다 삭제되는뎅')) return;
 
-    // categoryID와 같은 id 가진 항목을 제거한 새로운 배열 생성
-    const newData = list.filter(value => value.categoryID !== deleteID);
-
-    // 상태 업데이트
-    setList(newData);
+    // categoryID와 같은 id 가진 항목을 제거한 배열로 업데이트
+    setList(prevList =>
+      prevList.filter(value => value.categoryID !== deleteID),
+    );
   };
 
   const itemContainer = {
@@ -52,18 +51,6 @@ Category.propTypes = {
       }),
     ).isRequired,
   }).isRequired,
-  list: PropTypes.arrayOf(
-    PropTypes.shape({
-      categoryID: PropTypes.number.isRequired,
-      categoryName: PropTypes.string.isRequired,
-      items: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          name: PropTypes.string.isRequired,
-        }),
-      ).isRequired,
-    }),
-  ).isRequired,
   setList: PropTypes.func.isRequired,
 };
 
