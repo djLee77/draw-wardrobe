@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import TestPage from './pages/TestPage';
 import Board from './pages/Board';
 import NavigationBar from './components/NavigationBar';
+import PostPage from './pages/PostPage';
 
 const App = () => (
   <BrowserRouter>
@@ -13,6 +14,7 @@ const App = () => (
       <Route path="/board" element={<Board />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/test" element={<TestPage />} />
+      <Route path="/post" element={<PostPage />} />
     </Routes>
   </BrowserRouter>
 );
