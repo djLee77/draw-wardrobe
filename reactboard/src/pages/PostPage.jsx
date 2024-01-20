@@ -1,7 +1,7 @@
-import Comment from '../components/Post/Comment';
-import Content from '../components/Post/Content';
-import Footer from '../components/Post/Footer';
-import Header from '../components/Post/Header';
+import Comment from '../components/post/Comment';
+import Content from '../components/post/Content';
+import Footer from '../components/post/Footer';
+import Header from '../components/post/Header';
 
 const testData = {
   id: 1,

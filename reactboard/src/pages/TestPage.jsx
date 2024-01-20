@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Trash from '../components/Closet/Trash';
+import Trash from '../components/closet/Trash';
 import useToggle from '../hooks/useToggle';
-import Category from '../components/Closet/Category';
+import Category from '../components/closet/Category';
 import AddCategoryModal from '../components/Closet/modals/AddCateogryModal';
 
 const testData = [

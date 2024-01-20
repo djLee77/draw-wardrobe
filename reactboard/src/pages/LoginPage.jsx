@@ -1,5 +1,5 @@
 import React from 'react';
-import GoogleLoginButton from '../components/Login/GoogleLoginButton';
+import GoogleLoginButton from '../components/login/GoogleLoginButton';
 
 const LoginPage = () => {
   // const [idInput, handleChangeID] = useInput('');
