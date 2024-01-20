@@ -4,7 +4,7 @@ const Content = ({ content, img }) => {
   return (
     <div>
       <img src={img} alt="이미지" />
-      <span>{content}</span>
+      <p>{content}</p>
     </div>
   );
 };

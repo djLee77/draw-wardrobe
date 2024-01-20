@@ -1,17 +1,21 @@
 import PropTypes from 'prop-types'; // prop-types 불러오기
 
-const Footer = ({ likes, comments }) => {
+const Footer = ({ likeCount, commentCount }) => {
   return (
-    <div>
-      <div>하트 : {likes}</div>
-      <div>댓글 : {comments}</div>
+    <div style={{ display: 'flex' }}>
+      <div>
+        <button type="button">♥</button> : {likeCount}
+      </div>
+      <div>댓글 : {commentCount}</div>
+      <button type="button">북마크</button>
+      <hr />
     </div>
   );
 };
 
 Footer.propTypes = {
-  likes: PropTypes.number.isRequired,
-  comments: PropTypes.number.isRequired,
+  likeCount: PropTypes.number.isRequired,
+  commentCount: PropTypes.number.isRequired,
 };
 
 export default Footer;

@@ -1,4 +1,4 @@
-import Comment from '../components/post/Comment';
+import CommentList from '../components/comment/CommentList';
 import Content from '../components/post/Content';
 import Footer from '../components/post/Footer';
 import Header from '../components/post/Header';
@@ -10,15 +10,8 @@ const testData = {
   date: '2024-01-20',
   img: '',
   content: '내용입니다',
-  likes: 3,
-  comments: [
-    {
-      id: 1,
-      nickname: 'dd',
-      comment: '와우~',
-      date: '2024-01-20',
-    },
-  ],
+  likeCount: 3,
+  commentCount: 1,
 };
 
 const PostPage = () => {
@@ -31,8 +24,11 @@ const PostPage = () => {
       />
       <hr />
       <Content content={testData.content} img={testData.img} />
-      <Footer likes={testData.likes} comments={testData.comments?.length} />
-      <Comment comments={testData.comments} />
+      <Footer
+        likeCount={testData.likeCount}
+        commentCount={testData.commentCount}
+      />
+      <CommentList />
     </div>
   );
 };
