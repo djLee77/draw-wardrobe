@@ -2,18 +2,27 @@ import React, { useRef, useEffect } from 'react';
 import { Image, Transformer } from 'react-konva';
 import useImage from 'use-image';
 
-const DraggableImage = ({ imageSrc, x, y, onDragEnd }) => {
+const DraggableImage = ({
+  imageSrc,
+  x,
+  y,
+  scaleX,
+  scaleY,
+  isSelected,
+  onSelect,
+  onChange,
+  onDragEnd,
+}) => {
   const [image] = useImage(imageSrc);
   const imageRef = useRef();
   const trRef = useRef();
 
   useEffect(() => {
-    // Transformer를 현재 이미지에 적용
-    if (trRef.current && imageRef.current) {
+    if (isSelected && trRef.current && imageRef.current) {
       trRef.current.nodes([imageRef.current]);
       trRef.current.getLayer().batchDraw();
     }
-  }, []);
+  }, [isSelected]);
 
   return (
     <>
@@ -22,10 +31,25 @@ const DraggableImage = ({ imageSrc, x, y, onDragEnd }) => {
         image={image}
         x={x}
         y={y}
+        scaleX={scaleX}
+        scaleY={scaleY}
         draggable
+        onClick={onSelect}
+        onTap={onSelect}
         onDragEnd={onDragEnd}
+        onTransformEnd={() => {
+          const node = imageRef.current;
+          onChange({
+            x: node.x(),
+            y: node.y(),
+            scaleX: node.scaleX(),
+            scaleY: node.scaleY(),
+          });
+          node.scaleX(1);
+          node.scaleY(1);
+        }}
       />
-      <Transformer ref={trRef} />
+      {isSelected && <Transformer ref={trRef} />}
     </>
   );
 };

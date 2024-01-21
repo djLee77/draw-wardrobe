@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Stage, Layer } from 'react-konva';
-import DraggableImage from '../components/DraggableImage';
-import styles from './Board.module.css';
+import DraggableImage from '../components/DraggableImage'; // 경로에 맞게 조정하세요
+import styles from './Board.module.css'; // 경로에 맞게 조정하세요
 
 const Board = () => {
   const [imagesOnCanvas, setImagesOnCanvas] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
 
   const handleDragStart = (event, url) => {
     event.dataTransfer.setData('imageSrc', url);
@@ -16,25 +17,28 @@ const Board = () => {
     const { offsetX, offsetY } = event.nativeEvent;
     setImagesOnCanvas([
       ...imagesOnCanvas,
-      { imageSrc, x: offsetX, y: offsetY },
+      { imageSrc, x: offsetX, y: offsetY, scaleX: 1, scaleY: 1 },
     ]);
   };
 
   const updateImagePosition = (index, newAttrs) => {
     const updatedImages = imagesOnCanvas.map((img, i) => {
-      if (i === index) {
-        return { ...img, ...newAttrs };
-      }
-      return img;
+      return i === index ? { ...img, ...newAttrs } : img;
     });
     setImagesOnCanvas(updatedImages);
-    console.log(imagesOnCanvas);
+  };
+
+  const handleMouseDown = e => {
+    // 클릭된 대상이 Stage(배경)인 경우 선택 해제
+    if (e.target === e.target.getStage()) {
+      setSelectedId(null);
+    }
   };
 
   const imageUrls = [
     'https://image.msscdn.net/images/goods_img/20230912/3551101/3551101_16970790961650_320.jpg',
     'https://image.msscdn.net/images/goods_img/20220810/2711163/2711163_1_320.jpg',
-  ]; // 예시 이미지 URL들
+  ];
 
   return (
     <div className={styles.container}>
@@ -43,7 +47,7 @@ const Board = () => {
         onDrop={handleDropOnCanvas}
         onDragOver={e => e.preventDefault()}
       >
-        <Stage width={700} height={500}>
+        <Stage width={700} height={500} onMouseDown={handleMouseDown}>
           <Layer>
             {imagesOnCanvas.map((img, i) => (
               <DraggableImage
@@ -51,13 +55,19 @@ const Board = () => {
                 imageSrc={img.imageSrc}
                 x={img.x}
                 y={img.y}
+                scaleX={img.scaleX}
+                scaleY={img.scaleY}
+                isSelected={selectedId === i}
+                onSelect={() => setSelectedId(i)}
                 onChange={newAttrs => {
-                  const imgs = imagesOnCanvas.slice();
-                  imgs[i] = newAttrs;
-                  setImagesOnCanvas(imgs);
+                  updateImagePosition(i, newAttrs);
                 }}
                 onDragEnd={e => {
-                  updateImagePosition(i, e.target.x(), e.target.y());
+                  updateImagePosition(i, {
+                    ...img,
+                    x: e.target.x(),
+                    y: e.target.y(),
+                  });
                 }}
               />
             ))}
