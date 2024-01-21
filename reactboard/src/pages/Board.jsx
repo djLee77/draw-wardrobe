@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Stage, Layer } from 'react-konva';
 import DraggableImage from '../components/DraggableImage';
+import styles from './Board.module.css';
 
 const Board = () => {
   const [imagesOnCanvas, setImagesOnCanvas] = useState([]);
@@ -19,9 +20,12 @@ const Board = () => {
     ]);
   };
 
-  const updateImagePosition = (index, x, y) => {
+  const updateImagePosition = (index, newAttrs) => {
     const updatedImages = imagesOnCanvas.map((img, i) => {
-      return i === index ? { ...img, x, y } : img;
+      if (i === index) {
+        return { ...img, ...newAttrs };
+      }
+      return img;
     });
     setImagesOnCanvas(updatedImages);
     console.log(imagesOnCanvas);
@@ -33,7 +37,34 @@ const Board = () => {
   ]; // 예시 이미지 URL들
 
   return (
-    <div>
+    <div className={styles.container}>
+      <div
+        className={styles.Board}
+        onDrop={handleDropOnCanvas}
+        onDragOver={e => e.preventDefault()}
+      >
+        <Stage width={700} height={500}>
+          <Layer>
+            {imagesOnCanvas.map((img, i) => (
+              <DraggableImage
+                key={i}
+                imageSrc={img.imageSrc}
+                x={img.x}
+                y={img.y}
+                onChange={newAttrs => {
+                  const imgs = imagesOnCanvas.slice();
+                  imgs[i] = newAttrs;
+                  setImagesOnCanvas(imgs);
+                }}
+                onDragEnd={e => {
+                  updateImagePosition(i, e.target.x(), e.target.y());
+                }}
+              />
+            ))}
+          </Layer>
+        </Stage>
+      </div>
+
       <div style={{ marginBottom: '20px' }}>
         {imageUrls.map((src, i) => (
           <img
@@ -45,28 +76,6 @@ const Board = () => {
             style={{ width: '100px', marginRight: '10px' }}
           />
         ))}
-      </div>
-
-      <div
-        onDrop={handleDropOnCanvas}
-        onDragOver={e => e.preventDefault()}
-        style={{ width: '100%', height: '400px', border: '1px solid black' }}
-      >
-        <Stage width={window.innerWidth} height={400}>
-          <Layer>
-            {imagesOnCanvas.map((img, i) => (
-              <DraggableImage
-                key={i}
-                imageSrc={img.imageSrc}
-                x={img.x}
-                y={img.y}
-                onDragEnd={e => {
-                  updateImagePosition(i, e.target.x(), e.target.y());
-                }}
-              />
-            ))}
-          </Layer>
-        </Stage>
       </div>
     </div>
   );
