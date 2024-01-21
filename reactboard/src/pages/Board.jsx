@@ -26,6 +26,7 @@ const Board = () => {
       return i === index ? { ...img, ...newAttrs } : img;
     });
     setImagesOnCanvas(updatedImages);
+    console.log(imagesOnCanvas);
   };
 
   const handleMouseDown = e => {
@@ -33,6 +34,13 @@ const Board = () => {
     if (e.target === e.target.getStage()) {
       setSelectedId(null);
     }
+  };
+
+  const bringToFront = index => {
+    setImagesOnCanvas(images => {
+      const selected = images[index];
+      return [...images.filter((_, i) => i !== index), selected];
+    });
   };
 
   const imageUrls = [
@@ -58,7 +66,10 @@ const Board = () => {
                 scaleX={img.scaleX}
                 scaleY={img.scaleY}
                 isSelected={selectedId === i}
-                onSelect={() => setSelectedId(i)}
+                onSelect={() => {
+                  setSelectedId(i);
+                  bringToFront(i);
+                }}
                 onChange={newAttrs => {
                   updateImagePosition(i, newAttrs);
                 }}
