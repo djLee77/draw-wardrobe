@@ -1,4 +1,5 @@
 import Comment from './Comment';
+import WriteComment from './WriteComment';
 
 const comments = [
   {
@@ -13,6 +14,7 @@ const CommentList = () => {
   return (
     <div>
       <h4>댓글 목록</h4>
+      <WriteComment />
       {comments.map(comment => (
         <Comment key={comment.id} comment={comment} />
       ))}
