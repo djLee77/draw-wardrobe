@@ -1,14 +1,19 @@
 import PropTypes from 'prop-types'; // prop-types 불러오기
+import LikeToggleBtn from '../button/LikeToggleBtn';
+import BookMarkToggleBtn from '../button/BookMarkToggleBtn';
+
+const footerStyle = {
+  display: 'flex',
+  width: '240px',
+  justifyContent: 'space-between',
+};
 
 const Footer = ({ likeCount, commentCount }) => {
   return (
-    <div style={{ display: 'flex' }}>
-      <div>
-        <button type="button">♥</button> : {likeCount}
-      </div>
+    <div style={footerStyle}>
+      <LikeToggleBtn likeCount={likeCount} />
       <div>댓글 : {commentCount}</div>
-      <button type="button">북마크</button>
-      <hr />
+      <BookMarkToggleBtn isBookMark={false} />
     </div>
   );
 };
