@@ -8,10 +8,6 @@ const Board = () => {
   const [imagesOnCanvas, setImagesOnCanvas] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
 
-  // const handleDragStart = (event, url) => {
-  //   event.dataTransfer.setData('imageSrc', url);
-  // };
-
   const handleDropOnCanvas = event => {
     event.preventDefault();
     const imageSrc = JSON.parse(event.dataTransfer.getData('data')).img;
