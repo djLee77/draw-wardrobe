@@ -9,6 +9,9 @@ const NavigationBar = () => {
       <Link to="/board" className="nav-link">
         Board
       </Link>
+      <Link to="/save" className="nav-link">
+        Save
+      </Link>
     </nav>
   );
 };

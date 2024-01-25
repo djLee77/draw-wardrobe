@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import TestPage from './pages/TestPage';
 import Board from './pages/Board';
+import SaveTest from './pages/SaveTest';
 import NavigationBar from './components/NavigationBar';
 
 const App = () => (
