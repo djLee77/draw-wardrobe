@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Stage, Layer } from 'react-konva';
-import DraggableImage from '../components/DraggableImage'; // 경로에 맞게 조정하세요
-import styles from './Board.module.css'; // 경로에 맞게 조정하세요
+import DraggableImage from '../components/DraggableImage';
+import styles from './Board.module.css';
 
 const Board = () => {
   const [imagesOnCanvas, setImagesOnCanvas] = useState([]);
@@ -26,7 +26,6 @@ const Board = () => {
       return i === index ? { ...img, ...newAttrs } : img;
     });
     setImagesOnCanvas(updatedImages);
-    console.log(imagesOnCanvas);
   };
 
   const handleMouseDown = e => {
@@ -43,6 +42,11 @@ const Board = () => {
     });
   };
 
+  const save = () => {
+    localStorage.setItem('imagesOnCanvas', JSON.stringify(imagesOnCanvas));
+    console.log(localStorage.getItem('imagesOnCanvas'));
+  };
+
   const imageUrls = [
     'https://image.msscdn.net/images/goods_img/20230912/3551101/3551101_16970790961650_320.jpg',
     'https://image.msscdn.net/images/goods_img/20220810/2711163/2711163_1_320.jpg',
@@ -50,6 +54,10 @@ const Board = () => {
 
   return (
     <div className={styles.container}>
+      <button type="button" onClick={save}>
+        저장
+      </button>
+
       <div
         className={styles.Board}
         onDrop={handleDropOnCanvas}
@@ -67,8 +75,8 @@ const Board = () => {
                 scaleY={img.scaleY}
                 isSelected={selectedId === i}
                 onSelect={() => {
-                  setSelectedId(i);
                   bringToFront(i);
+                  setSelectedId(i);
                 }}
                 onChange={newAttrs => {
                   updateImagePosition(i, newAttrs);
