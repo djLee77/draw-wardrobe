@@ -12,24 +12,12 @@ const testData = [
       {
         id: 0,
         name: '이병선',
+        img: 'https://cdn.discordapp.com/attachments/589130484081098790/1199924538373324800/1.jpg?ex=65c44fcf&is=65b1dacf&hm=fe1326129a808723b57c3f2ee9f866a1e5ab079d29665417839b6af4d05759b0&',
       },
       {
         id: 1,
         name: '이대준',
-      },
-    ],
-  },
-  {
-    categoryName: '치잉',
-    categoryID: 1,
-    items: [
-      {
-        id: 0,
-        name: '이우현',
-      },
-      {
-        id: 1,
-        name: '김상규',
+        img: 'https://cdn.discordapp.com/attachments/589130484081098790/1199924538373324800/1.jpg?ex=65c44fcf&is=65b1dacf&hm=fe1326129a808723b57c3f2ee9f866a1e5ab079d29665417839b6af4d05759b0&',
       },
     ],
   },

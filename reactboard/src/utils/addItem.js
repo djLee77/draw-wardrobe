@@ -1,8 +1,9 @@
 // addItem.js
-const addItem = (setList, categoryID, name) => {
+const addItem = (setList, categoryID, name, img) => {
   const newItem = {
     id: Math.random(),
     name,
+    img,
   };
 
   setList(prevList => {

@@ -7,7 +7,8 @@ const Item = ({ categoryID, item }) => {
   };
 
   const itemStyle = {
-    backgroundColor: 'gray',
+    display: 'flex',
+    flexDirection: 'column',
     margin: '12px',
   };
 
@@ -17,6 +18,7 @@ const Item = ({ categoryID, item }) => {
       draggable
       onDragStart={e => handleDragStart(e, item.id)}
     >
+      <img src={item.img} alt="이미지" width={150} />
       {item.name}
     </div>
   );

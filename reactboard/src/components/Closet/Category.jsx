@@ -48,6 +48,7 @@ Category.propTypes = {
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
+        img: PropTypes.string.isRequired,
       }),
     ).isRequired,
   }).isRequired,
