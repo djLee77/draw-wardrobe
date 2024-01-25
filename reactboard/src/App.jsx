@@ -3,6 +3,7 @@ import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import TestPage from './pages/TestPage';
 import Board from './pages/Board';
+import SaveTest from './pages/SaveTest';
 import NavigationBar from './components/NavigationBar';
 import PostPage from './pages/PostPage';
 
@@ -14,6 +15,7 @@ const App = () => (
       <Route path="/board" element={<Board />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/test" element={<TestPage />} />
+      <Route path="/save" element={<SaveTest />} />
       <Route path="/post" element={<PostPage />} />
     </Routes>
   </BrowserRouter>
