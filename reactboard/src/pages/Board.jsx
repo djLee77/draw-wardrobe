@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import { Stage, Layer } from 'react-konva';
 import DraggableImage from '../components/DraggableImage';
 import styles from './Board.module.css';
+import Closet from '../components/closet/Closet';
 
 const Board = () => {
   const [imagesOnCanvas, setImagesOnCanvas] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
 
-  const handleDragStart = (event, url) => {
-    event.dataTransfer.setData('imageSrc', url);
-  };
+  // const handleDragStart = (event, url) => {
+  //   event.dataTransfer.setData('imageSrc', url);
+  // };
 
   const handleDropOnCanvas = event => {
     event.preventDefault();
-    const imageSrc = event.dataTransfer.getData('imageSrc');
+    const imageSrc = JSON.parse(event.dataTransfer.getData('data')).img;
+    console.log(imageSrc);
     const { offsetX, offsetY } = event.nativeEvent;
     setImagesOnCanvas([
       ...imagesOnCanvas,
@@ -46,11 +48,6 @@ const Board = () => {
     localStorage.setItem('imagesOnCanvas', JSON.stringify(imagesOnCanvas));
     console.log(localStorage.getItem('imagesOnCanvas'));
   };
-
-  const imageUrls = [
-    'https://image.msscdn.net/images/goods_img/20230912/3551101/3551101_16970790961650_320.jpg',
-    'https://image.msscdn.net/images/goods_img/20220810/2711163/2711163_1_320.jpg',
-  ];
 
   return (
     <div className={styles.container}>
@@ -94,18 +91,7 @@ const Board = () => {
         </Stage>
       </div>
 
-      <div style={{ marginBottom: '20px' }}>
-        {imageUrls.map((src, i) => (
-          <img
-            key={i}
-            src={src}
-            alt={`${i}`}
-            draggable
-            onDragStart={e => handleDragStart(e, src)}
-            style={{ width: '100px', marginRight: '10px' }}
-          />
-        ))}
-      </div>
+      <Closet />
     </div>
   );
 };

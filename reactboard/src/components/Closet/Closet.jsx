@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Trash from '../components/closet/Trash';
-import useToggle from '../hooks/useToggle';
-import Category from '../components/closet/Category';
-import AddCategoryModal from '../components/closet/modals/AddCateogryModal';
+import Trash from './Trash';
+import useToggle from '../../hooks/useToggle';
+import Category from './Category';
+import AddCategoryModal from './modals/AddCateogryModal';
 
 const testData = [
   {
@@ -23,7 +23,7 @@ const testData = [
   },
 ];
 
-const TestPage = () => {
+const Closet = () => {
   const [list, setList] = useState(testData);
   const [isLarged, toggle] = useToggle(false);
   const boxStyle = {
@@ -53,4 +53,4 @@ const TestPage = () => {
   );
 };
 
-export default TestPage;
+export default Closet;
