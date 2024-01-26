@@ -5,7 +5,8 @@ import Board from './pages/Board';
 import SaveTest from './pages/SaveTest';
 import NavigationBar from './components/NavigationBar';
 import PostPage from './pages/PostPage';
-import MyPostListPage from './pages/MyPostListPage';
+import MyPostsPage from './pages/MyPostsPage';
+import MyBookmarksPage from './pages/MyBookmarksPage';
 
 const App = () => (
   <BrowserRouter>
@@ -16,7 +17,8 @@ const App = () => (
       <Route path="/login" element={<LoginPage />} />
       <Route path="/save" element={<SaveTest />} />
       <Route path="/post" element={<PostPage />} />
-      <Route path="/user/posts" element={<MyPostListPage />} />
+      <Route path="/user/posts" element={<MyPostsPage />} />
+      <Route path="/user/bookmarks" element={<MyBookmarksPage />} />
     </Routes>
   </BrowserRouter>
 );
