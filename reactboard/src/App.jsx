@@ -5,6 +5,7 @@ import Board from './pages/Board';
 import SaveTest from './pages/SaveTest';
 import NavigationBar from './components/NavigationBar';
 import PostPage from './pages/PostPage';
+import MyPostListPage from './pages/MyPostListPage';
 
 const App = () => (
   <BrowserRouter>
@@ -15,6 +16,7 @@ const App = () => (
       <Route path="/login" element={<LoginPage />} />
       <Route path="/save" element={<SaveTest />} />
       <Route path="/post" element={<PostPage />} />
+      <Route path="/user/posts" element={<MyPostListPage />} />
     </Routes>
   </BrowserRouter>
 );
