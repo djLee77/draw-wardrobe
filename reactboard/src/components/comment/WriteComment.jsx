@@ -13,7 +13,9 @@ const WriteComment = () => {
   return (
     <div>
       <TextField
-        id="input-with-icon-textfield"
+        id="standard-textarea"
+        placeholder="댓글 입력"
+        multiline
         variant="standard"
         value={value}
         onChange={handleChange}
