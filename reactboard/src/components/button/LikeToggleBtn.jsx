@@ -13,8 +13,22 @@ const iconStyle = {
   },
 };
 
-const LikeToggleBtn = ({ likeCount }) => {
-  const [toggled, setToggled] = useToggle(false);
+const likePosts = [
+  {
+    postId: 1,
+  },
+  { postId: 2 },
+];
+
+// 좋아요한 글 목록 불러와서 현재 포스트 id 있는지 확인
+const isLikePost = id => {
+  return likePosts.some(post => post.postId === id);
+};
+
+// 좋아요 api 버튼 함수 만들기
+
+const LikeToggleBtn = ({ likeCount, postId }) => {
+  const [toggled, setToggled] = useToggle(isLikePost(postId));
   return (
     <div style={style}>
       {toggled ? (
@@ -33,6 +47,7 @@ const LikeToggleBtn = ({ likeCount }) => {
 
 LikeToggleBtn.propTypes = {
   likeCount: PropTypes.number.isRequired,
+  postId: PropTypes.number.isRequired,
 };
 
 export default LikeToggleBtn;

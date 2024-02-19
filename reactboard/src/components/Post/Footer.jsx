@@ -8,12 +8,12 @@ const footerStyle = {
   justifyContent: 'space-between',
 };
 
-const Footer = ({ likeCount, commentCount }) => {
+const Footer = ({ likeCount, commentCount, postId }) => {
   return (
     <div style={footerStyle}>
-      <LikeToggleBtn likeCount={likeCount} />
+      <LikeToggleBtn likeCount={likeCount} postId={postId} />
       <div>댓글 : {commentCount}</div>
-      <BookMarkToggleBtn isBookMark={false} />
+      <BookMarkToggleBtn isBookMark={false} postId={postId} />
     </div>
   );
 };
@@ -21,6 +21,7 @@ const Footer = ({ likeCount, commentCount }) => {
 Footer.propTypes = {
   likeCount: PropTypes.number.isRequired,
   commentCount: PropTypes.number.isRequired,
+  postId: PropTypes.number.isRequired,
 };
 
 export default Footer;

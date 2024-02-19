@@ -10,6 +10,8 @@ const comments = [
   },
 ];
 
+// 댓글 목록 불러오기 api 작성
+
 const CommentList = () => {
   return (
     <div>

@@ -9,8 +9,16 @@ const testData = {
   title: '제목1',
   writer: '김동건',
   date: '2024-01-20',
-  img: '',
-  content: '내용입니다',
+  content: [
+    {
+      imageSrc:
+        'https://cdn.discordapp.com/attachments/589130484081098790/1199924538373324800/1.jpg?ex=65c44fcf&is=65b1dacf&hm=fe1326129a808723b57c3f2ee9f866a1e5ab079d29665417839b6af4d05759b0&',
+      scaleX: 1,
+      scaleY: 1,
+      x: 120,
+      y: 113,
+    },
+  ],
   likeCount: 3,
   commentCount: 1,
 };
@@ -33,6 +41,7 @@ const PostPage = () => {
       <Footer
         likeCount={testData.likeCount}
         commentCount={testData.commentCount}
+        postId={testData.id}
       />
       <CommentList />
     </div>
